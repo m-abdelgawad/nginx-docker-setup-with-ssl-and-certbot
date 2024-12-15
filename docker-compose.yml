@@ -8,4 +8,4 @@ services:
     volumes:
       - ./certs:/etc/nginx/certs:rw
       - ./default.conf:/etc/nginx/conf.d/default.conf:ro
-    restart: unless-stopped
+    restart: always
