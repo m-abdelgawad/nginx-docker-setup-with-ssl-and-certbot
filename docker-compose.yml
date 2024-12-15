@@ -1,8 +1,9 @@
 services:
   nginx:
-    build: .
+    #build: .
     container_name: nginx
     image: mabdelgawad94/nginx:latest
+    pull_policy: always
     ports:
       - "80:80"
       - "443:443"
