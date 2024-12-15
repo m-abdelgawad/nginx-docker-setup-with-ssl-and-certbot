@@ -11,6 +11,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Cron job for cert renewals
+# This will attempt to renew every 12 hours. If renewal occurs, it copies the certificates and reloads nginx.
 RUN echo "0 */12 * * * /usr/bin/certbot renew --quiet && cp -L /etc/letsencrypt/live/automagicdeveloper.com/fullchain.pem /etc/nginx/certs/fullchain.pem && cp -L /etc/letsencrypt/live/automagicdeveloper.com/privkey.pem /etc/nginx/certs/privkey.pem && nginx -s reload" > /etc/cron.d/certbot-renew
 RUN chmod 0644 /etc/cron.d/certbot-renew && crontab /etc/cron.d/certbot-renew
 
