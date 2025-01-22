@@ -3,7 +3,7 @@ set -e
 
 CERT_DEST="/etc/nginx/certs"
 DOMAIN="automagicdeveloper.com"
-DOMAINS="-d automagicdeveloper.com -d www.automagicdeveloper.com -d replicabot.automagicdeveloper.com"
+DOMAINS="-d automagicdeveloper.com -d www.automagicdeveloper.com -d replicabot.automagicdeveloper.com -d aistoreassistant.automagicdeveloper.com"
 
 # Function to initially obtain certificates if they don't exist
 obtain_certificates() {
