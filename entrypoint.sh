@@ -3,7 +3,31 @@ set -e
 
 CERT_DEST="/etc/nginx/certs"
 DOMAIN="automagicdeveloper.com"
-DOMAINS="-d automagicdeveloper.com -d www.automagicdeveloper.com -d replicabot.automagicdeveloper.com -d aistoreassistant.automagicdeveloper.com"
+
+# List only the subdomain prefixes here. An empty string "" means the root domain itself.
+SUBDOMAIN_PREFIXES=(
+  ""               # root domain → automagicdeveloper.com
+  "www"
+  "myreads"
+  "lifehub"
+  "enjaz"
+  "replicabot"
+  "aistoreassistant"
+  "polarity"
+  "clientnest"
+)
+
+# Construct the -d flags dynamically
+DOMAINS=""
+for prefix in "${SUBDOMAIN_PREFIXES[@]}"; do
+    if [ -z "$prefix" ]; then
+        DOMAINS+=" -d $DOMAIN"
+    else
+        DOMAINS+=" -d ${prefix}.${DOMAIN}"
+    fi
+done
+
+echo "Domains variable value is: $DOMAINS"
 
 # Function to initially obtain certificates if they don't exist
 obtain_certificates() {

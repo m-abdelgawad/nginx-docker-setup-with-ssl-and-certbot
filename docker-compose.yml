@@ -1,6 +1,6 @@
 services:
   nginx:
-    #build: .
+    build: .
     container_name: nginx
     image: mabdelgawad94/nginx:latest
     pull_policy: always
