@@ -1,35 +1,32 @@
-version: '3.8'
+version: "3.9"
 
 services:
   nginx:
-    build: .
+    # Build the custom image with Certbot, snippets, entrypoint…
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mabdelgawad94/nginx:latest      # optional tag for pushes
     container_name: nginx
+    pull_policy: if_not_present
+
     ports:
       - "80:80"
       - "443:443"
+
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/snippets:/etc/nginx/snippets
+      # ► mount the whole conf.d directory, not a single file
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      # ► mount the shared snippet directory
+      - ./nginx/snippets:/etc/nginx/snippets:ro
+      # ► writable cert location (entrypoint.sh copies certs here)
       - ./certs:/etc/nginx/certs
-    networks:
-      - app-network
-    restart: unless-stopped
 
-  # Example app container (add more as needed)
-  myreads-frontend:
-    image: myreads-frontend:latest
-    container_name: myreads-frontend
     networks:
-      - app-network
-    restart: unless-stopped
+      - nginx_network
+    restart: always
 
-  myreads-backend:
-    image: myreads-backend:latest
-    container_name: myreads-backend
-    networks:
-      - app-network
-    restart: unless-stopped
 
 networks:
-  app-network:
-    driver: bridge
+  nginx_network:
+    name: nginx_network
