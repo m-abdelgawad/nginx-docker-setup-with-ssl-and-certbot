@@ -1,7 +1,7 @@
 # Alpine image with Nginx + Certbot + cron
 FROM nginx:1.25-alpine
 
-RUN apk add --no-cache certbot curl bash cron
+RUN apk add --no-cache certbot curl bash dcron
 
 # Copy full Nginx configuration (default.conf + snippets)
 COPY nginx/conf.d /etc/nginx/conf.d

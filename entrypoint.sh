@@ -36,6 +36,6 @@ obtain_certificates() {
 
 [[ -f "$CERT_DEST/fullchain.pem" && -f "$CERT_DEST/privkey.pem" ]] || obtain_certificates
 
-service cron start
+crond -f -l 2 &
 echo "Starting Nginx…"
 exec nginx -g "daemon off;"
