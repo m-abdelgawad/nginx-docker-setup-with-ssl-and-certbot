@@ -6,8 +6,16 @@ DOMAIN="automagicdeveloper.com"
 
 # List only the sub-domain prefixes here. "" == root domain.
 SUBDOMAIN_PREFIXES=(
-  "" "www" "myreads" "lifehub" "enjaz"
-  "replicabot" "aistoreassistant" "polarity" "clientnest"
+  ""
+  "www"
+  "myreads"
+  "lifehub"
+  "enjaz"
+  "replicabot"
+  "aistoreassistant"
+  "polarity"
+  "clientnest"
+  "n8n"
 )
 
 # Build the -d flags for Certbot
