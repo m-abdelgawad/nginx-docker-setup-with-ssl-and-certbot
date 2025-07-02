@@ -2,30 +2,20 @@ version: "3.9"
 
 services:
   nginx:
-    # Build the custom image with Certbot, snippets, entrypoint…
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: mabdelgawad94/nginx:latest      # optional tag for pushes
+    build: .
+    image: mabdelgawad94/nginx:latest      # keep your tag
     container_name: nginx
-    pull_policy: if_not_present
-
     ports:
       - "80:80"
       - "443:443"
-
     volumes:
-      # ► mount the whole conf.d directory, not a single file
+      # certificates (read-write so certbot can renew)
+      - ./certs:/etc/nginx/certs:rw
+      # mount the whole conf directory so default.conf **and** snippets are visible
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      # ► mount the shared snippet directory
-      - ./nginx/snippets:/etc/nginx/snippets:ro
-      # ► writable cert location (entrypoint.sh copies certs here)
-      - ./certs:/etc/nginx/certs
-
     networks:
       - nginx_network
     restart: always
-
 
 networks:
   nginx_network:
