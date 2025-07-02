@@ -31,6 +31,6 @@ fi
 # ───────────────────────────────────────────────────────────────
 # Kick off cron (for renewals) and run Nginx in foreground
 # ───────────────────────────────────────────────────────────────
-service cron start
+crond -b
 echo "[entrypoint] Starting Nginx…"
 exec nginx -g "daemon off;"
