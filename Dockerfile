@@ -2,7 +2,7 @@ FROM nginx:1.26-alpine
 
 LABEL maintainer="Mohamed Abdelgawwad <muhammadabdelgawwad@gmail.com>"
 
-RUN apk add --no-cache certbot certbot-nginx bash grep sed coreutils tzdata cron
+RUN apk add --no-cache certbot certbot-nginx bash grep sed coreutils tzdata dcron
 
 # config + snippets
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
