@@ -16,6 +16,7 @@ SUBDOMAIN_PREFIXES=(
   "polarity"
   "clientnest"
   "n8n"
+  "litellm"
 )
 
 # Build the -d flags for Certbot
