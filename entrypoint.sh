@@ -17,6 +17,7 @@ SUBDOMAIN_PREFIXES=(
   "clientnest"
   "n8n"
   "litellm"
+  "walletscraper"
 )
 
 # Build the -d flags for Certbot
