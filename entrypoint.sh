@@ -19,6 +19,7 @@ SUBDOMAIN_PREFIXES=(
   "litellm"
   "walletscraper"
   "egypt-gold-tracker"
+  "portfolio"
 )
 
 # Build the -d flags for Certbot
