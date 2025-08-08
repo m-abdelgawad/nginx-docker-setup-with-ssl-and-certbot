@@ -2,7 +2,7 @@
 # Nginx Docker Setup with SSL & Certbot — **Multi‑App Gateway**
 
 > Last updated 2025-07-02
-
+ 
 This repository ships a production‑ready **Nginx reverse‑proxy** in Docker,
 fronting any number of backend applications running on the *same* host.
 Certificates are issued & renewed automatically via **Let’s Encrypt (Certbot)**.
