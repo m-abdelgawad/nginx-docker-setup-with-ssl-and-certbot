@@ -13,6 +13,7 @@ services:
       - ./certs:/etc/nginx/certs:rw
       # mount the whole conf directory so default.conf **and** snippets are visible
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - portfolio_media_data:/var/www/portfolio/media:ro
     networks:
       - nginx_network
     restart: always
