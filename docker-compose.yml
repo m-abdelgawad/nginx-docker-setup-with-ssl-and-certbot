@@ -12,7 +12,7 @@ services:
       # mount the whole conf directory so default.conf **and** snippets are visible
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       # Mount the shared media volume from the portfolio app, read-only
-      - portfolio_media_data:/var/www/portfolio/media:ro
+      - portfolio_media_data:/var/www/media:ro
     networks:
       - nginx_network
     restart: always
