@@ -8,18 +8,14 @@ DOMAIN="automagicdeveloper.com"
 SUBDOMAIN_PREFIXES=(
   ""
   "www"
-  "myreads"
-  "lifehub"
   "enjaz"
   "replicabot"
   "aistoreassistant"
-  "polarity"
-  "clientnest"
   "n8n"
   "litellm"
   "walletscraper"
   "egypt-gold-tracker"
-  "portfolio"
+  "admin"
 )
 
 # Build the -d flags for Certbot
