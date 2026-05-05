@@ -43,11 +43,19 @@ obtain_certificates() {
   cp /etc/letsencrypt/live/$DOMAIN/privkey.pem  "$CERT_DEST"/privkey.pem
 }
 
-[[ -f "$CERT_DEST/fullchain.pem" && -f "$CERT_DEST/privkey.pem" ]] || obtain_certificates
+# Obtain certs if missing, or if they expire within 7 days (604800 seconds)
+if [[ ! -f "$CERT_DEST/fullchain.pem" || ! -f "$CERT_DEST/privkey.pem" ]]; then
+  obtain_certificates
+elif ! openssl x509 -checkend 604800 -noout -in "$CERT_DEST/fullchain.pem"; then
+  echo "Certificate expires within 7 days or is already expired. Renewing now…"
+  obtain_certificates
+else
+  echo "Certificate is valid for more than 7 days. Skipping renewal."
+fi
 
-# Schedule cert renewal: 03:00 on the 1st and 15th of every month.
-# --days 7 ensures certbot acts when ≤ 7 days remain before expiry.
-echo "0 3 1,15 * * /renew_certs.sh >> /var/log/certbot-renew.log 2>&1" | crontab -
+# Schedule cert renewal: daily at 03:00.
+# certbot is a no-op when the cert has >7 days left (--days 7 threshold).
+echo "0 3 * * * /renew_certs.sh >> /var/log/certbot-renew.log 2>&1" | crontab -
 
 crond -f -l 2 &
 echo "Starting Nginx…"
