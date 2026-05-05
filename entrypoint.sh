@@ -45,6 +45,10 @@ obtain_certificates() {
 
 [[ -f "$CERT_DEST/fullchain.pem" && -f "$CERT_DEST/privkey.pem" ]] || obtain_certificates
 
+# Schedule cert renewal: 03:00 on the 1st and 15th of every month.
+# --days 7 ensures certbot acts when ≤ 7 days remain before expiry.
+echo "0 3 1,15 * * /renew_certs.sh >> /var/log/certbot-renew.log 2>&1" | crontab -
+
 crond -f -l 2 &
 echo "Starting Nginx…"
 exec nginx -g "daemon off;"

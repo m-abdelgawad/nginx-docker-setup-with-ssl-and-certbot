@@ -9,4 +9,8 @@ COPY nginx/conf.d /etc/nginx/conf.d
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Copy the certificate renewal script
+COPY renew_certs.sh /renew_certs.sh
+RUN chmod +x /renew_certs.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
