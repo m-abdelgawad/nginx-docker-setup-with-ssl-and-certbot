@@ -20,6 +20,8 @@ SUBDOMAIN_PREFIXES=(
   "onetrack"
   "llm"
   "kt"
+  "stt"
+  "guardrails"
 )
 
 # Build the -d flags for Certbot
